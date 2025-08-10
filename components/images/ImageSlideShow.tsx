@@ -21,34 +21,38 @@ const images = [
 ];
 
 export default function ImageSlideshow() {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [current, setCurrent] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) =>
-        prevIndex < images.length - 1 ? prevIndex + 1 : 0
-      );
-    }, 5000);
-
-    return () => clearInterval(interval);
+    const id = setInterval(
+      () => setCurrent((i) => (i < images.length - 1 ? i + 1 : 0)),
+      5000
+    );
+    return () => clearInterval(id);
   }, []);
 
   return (
     <div
-      className={
-        "relative size-full rounded-[8px] overflow-hidden [box-shadow:0_0_0.5rem_rgba(0,0,0,0.5)]"
-      }
+      className="
+        relative w-full aspect-[4/3] md:aspect-[16/9]
+        rounded-2xl overflow-hidden
+        [box-shadow:0_0_0.5rem_rgba(0,0,0,0.5)]
+      "
     >
-      {images.map((image, index) => (
+      {images.map((img, i) => (
         <Image
-          key={index}
-          src={image.image}
-          className={
-            index === currentImageIndex
-              ? "z-1 opacity-100 scale-100 translate-x-0 rotate-0"
-              : "size-full object-cover absolute top-0 left-0 opacity-0 -translate-x-[1rem] -rotate-[5deg] scale-110"
-          }
-          alt={image.alt}
+          key={i}
+          src={img.image}
+          alt={img.alt}
+          fill                                 // <- make it fill the frame
+          sizes="(min-width: 768px) 50vw, 100vw"
+          className={[
+            "absolute inset-0 object-cover transition-[opacity,transform] duration-700 ease-out",
+            i === current
+              ? "opacity-100 translate-x-0 rotate-0 scale-100 z-10"
+              : "opacity-0 -translate-x-4 -rotate-2 scale-110 z-0 pointer-events-none",
+          ].join(" ")}
+          priority={i === 0}
         />
       ))}
     </div>
