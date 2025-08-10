@@ -1,5 +1,3 @@
-"use client";
-
 type MealsPageProps = Promise<{ mealsId: string }>;
 
 export default async function MealsDetailsPage({

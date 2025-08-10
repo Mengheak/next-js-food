@@ -4,7 +4,6 @@ import Link from "next/link";
 export default function Home() {
   return (
     <>
-      {/* Container */}
       <header
         className="
           mx-auto w-[92%] max-w-7xl
@@ -32,7 +31,7 @@ export default function Home() {
             Taste & share food from all around the world.
           </p>
 
-          <div className="mt-6 flex flex-wrap items-center gap-3 text-base sm:text-lg">
+          <div className="mt-6 flex flex-wrap items-center gap-3 text-base sm:text-lg justify-center">
             <Link
               href="/community"
               className="
