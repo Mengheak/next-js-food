@@ -1,5 +1,12 @@
-type MealsPageProps = { params: { mealsId: string } };
+"use client";
 
-export default async function MealsDetailsPage({ params }: MealsPageProps) {
-  return <main>This is {params.mealsId} page</main>;
+type MealsPageProps = Promise<{ mealsId: string }>;
+
+export default async function MealsDetailsPage({
+  params,
+}: {
+  params: MealsPageProps;
+}) {
+  const { mealsId } = await params;
+  return <main>This is {mealsId} page</main>;
 }
