@@ -1,4 +1,4 @@
-export default function MealsDetailsPage({
+export default async function MealsDetailsPage({
   params,
 }: {
   params: { mealsId: string };
